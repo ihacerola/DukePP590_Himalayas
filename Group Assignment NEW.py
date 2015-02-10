@@ -18,7 +18,7 @@ list_of_dfs = [pd.read_table(v, names = ['ID', 'date', 'kwh'], sep = " ",na_valu
 df_assign = pd.read_csv(root + "SME and Residential allocations.csv",na_values= missing, usecols = [0,1,2,3,4])
 
 # MISSING DATA
-df. dropna(how="all") #drop ROWS with ALL missing values
+list_of_dfs=list_of_dfs.dropna(how="all") #drop ROWS with ALL missing values
 
 #STACKING AND MERGING  
 df_stack = pd.concat(list_of_dfs, ignore_index = True) 
@@ -28,11 +28,17 @@ df = pd.merge(df_stack, df_assign)
 #CHECK DAYLIGHT SAVING DATES
 df['tt']=df['date']% 100
 df1 = df[df['tt'] <49]
-df[df.date==45203] 
+df[df.date==45202] 
+df[df.date==45203]
+df[df.date==66949]
+df[df.date==66950]
+df[df.date==29849]
+df[df.date==29850]
 
 # DROP DUPLICATES
-t_b=df.duplicated()
-b_t=df.duplicated(take_last=True)
+t_b=df1.duplicated()
+b_t=df1.duplicated(take_last=True)
 unique=~(t_b|b_t) #true from top to bottom or bottom to top returns true 
 unique=~t_b & ~b_t
+df2=df1[unique]
 
