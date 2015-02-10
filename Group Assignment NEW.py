@@ -17,17 +17,22 @@ list_of_dfs = [pd.read_table(v, names = ['ID', 'date', 'kwh'], sep = " ",na_valu
 
 df_assign = pd.read_csv(root + "SME and Residential allocations.csv",na_values= missing, usecols = [0,1,2,3,4])
 
-#STACKING AND MERGING  
+# MISSING DATA
+df. dropna(how="all") #drop ROWS with ALL missing values
 
+#STACKING AND MERGING  
 df_stack = pd.concat(list_of_dfs, ignore_index = True) 
 del list_of_dfs
 df = pd.merge(df_stack, df_assign)
 
-# CONFIRM MISSING VALUE 
-pd.isnull(df).any(1).nonzero()[0]
+#CHECK DAYLIGHT SAVING DATES
+df['tt']=df['date']% 100
+df1 = df[df['tt'] <49]
+df[df.date==45203] 
 
-df1=df[df.date==66949]
-list1=[66949,66950]
+# DROP DUPLICATES
+t_b=df.duplicated()
+b_t=df.duplicated(take_last=True)
+unique=~(t_b|b_t) #true from top to bottom or bottom to top returns true 
+unique=~t_b & ~b_t
 
-for v in list1:
-    print(6)
