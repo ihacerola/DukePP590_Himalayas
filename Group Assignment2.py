@@ -27,4 +27,4 @@ df.sort(['ID', 'date'], inplace = True)
 
 # TRIMMING 
 df=df[df['code']==1]
-df[(df['stimulus']=='1'])| df['stimulus']=='E'|df['tarrif']=='A')]
+df[(df['stimulus']=='1'| df['stimulus']=='E'|df['tarrif']=='A')]
