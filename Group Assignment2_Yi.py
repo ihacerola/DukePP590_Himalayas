@@ -43,8 +43,8 @@ df4 = df[(df['tariff'] != 'E') & (df['stimulus'] == 'E')] # checking if people a
 grp = df.groupby(['tariff', 'date'])
 
 # Get separate sets of treatment and control values by date
-trt = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'E'}
-ctrl = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'A'}
+trt = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'A'}
+ctrl = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'E'}
 keys = trt.keys()
 
 # create dataframes of this information
