@@ -14,7 +14,7 @@ paths = [root + v for v in os.listdir(root) if v.startswith("File")]
 
 #IMPORT DATA & Stacking-----------------------------------------------------------
 missing=['.','NA','NULL',' ','0','-','999999999']
-list_of_dfs = [pd.read_table(v, names = ['ID', 'date', 'kwh'], sep = " ", na_values= missing,) for v in paths]
+list_of_dfs = [pd.read_table(v, names = ['ID', 'date', 'kwh'], sep = " ", na_values= missing) for v in paths]
 df_stack = pd.concat (list_of_dfs, ignore_index = True)
 del list_of_dfs
 
@@ -38,6 +38,7 @@ df1 = df[(df['tariff'] == 'A') & (df['stimulus'] != '1')] # checking if there ar
 df2 = df[(df['tariff'] != 'A') & (df['stimulus'] == '1')] # checking if there are people only stimulus 1 but not tariff A
 df3 = df[(df['tariff'] == 'E') & (df['stimulus'] != 'E')] 
 df4 = df[(df['tariff'] != 'E') & (df['stimulus'] == 'E')] # checking if people are assigned in control group are in the control in both treatment
+df5 = df[df['tariff'] == 'A']
 
 # Set up data 
 grp = df.groupby(['tariff', 'date'])
@@ -45,9 +46,9 @@ grp = df.groupby(['tariff', 'date'])
 # Get separate sets of treatment and control values by date
 trt = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'A'}
 ctrl = {k[1]: df.kwh[v].values for k, v in grp.groups.iteritems() if k[0] == 'E'}
-keys = trt.keys()
 
 # create dataframes of this information
+keys = trt.keys()
 tstats = DataFrame([(k, np.abs(ttest_ind(trt[k],ctrl[k], equal_var=False)[0])) for k in keys],
     columns =['date', 'tstats'])
 pvals = DataFrame([(k, np.abs(ttest_ind(trt[k],ctrl[k], equal_var=False)[1])) for k in keys],
@@ -57,6 +58,7 @@ t_p = pd.merge(tstats, pvals)
 ## sort and reset _index
 t_p.sort(['date'], inplace=True) # inplace = True to change the values
 t_p.reset_index(inplace=True, drop=True)
+t_p = t_p.dropna(axis = 0, how = 'any')  # drop any missing values in tstats and pvals
 
 # PLOTTING ----------------------
 fig1 = plt.figure() #initialize plot
