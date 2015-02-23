@@ -82,13 +82,13 @@ ax1 = fig1.add_subplot(2,1,1) # (row, columns, reference) two rows, one column, 
 ax1.plot(t_p['tstats'])
 ax1.axhline(2, color='r', linestyle ='--')
 ax1.axvline(180, color='g', linestyle ='--')
-ax1.set_title('t-stats over-time')
+ax1.set_title('t-stats over-time (daily)')
 
 ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p['pvals'])
 ax2.axhline( 0.05, color='r', linestyle ='--')
 ax2.axvline( 180, color='g', linestyle ='--')
-ax2.set_title('p-values over-time')
+ax2.set_title('p-values over-time (daily)')
 
 # MONTHLY AGGREGATION --------------------
 grp = df.groupby(['year', 'month', 'ID', 'tariff'])
@@ -122,10 +122,10 @@ ax1 = fig1.add_subplot(2,1,1) # (row, columns, reference) two rows, one column, 
 ax1.plot(t_p['tstats'])
 ax1.axhline(2, color='r', linestyle ='--')
 ax1.axvline(6, color='g', linestyle ='--')
-ax1.set_title('t-stats over-time')
+ax1.set_title('t-stats over-time (monthly)')
 
 ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p['pvals'])
 ax2.axhline( 0.05, color='r', linestyle ='--')
 ax2.axvline(6, color='g', linestyle ='--')
-ax2.set_title('p-values over-time')
+ax2.set_title('p-values over-time (monthly)')
