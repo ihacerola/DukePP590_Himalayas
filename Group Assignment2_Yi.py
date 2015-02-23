@@ -81,11 +81,13 @@ fig1 = plt.figure() #initialize plot
 ax1 = fig1.add_subplot(2,1,1) # (row, columns, reference) two rows, one column, first plot
 ax1.plot(t_p['tstats'])
 ax1.axhline(2, color='r', linestyle ='--')
+ax1.axvline(180, color='g', linestyle ='--')
 ax1.set_title('t-stats over-time')
 
 ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p['pvals'])
 ax2.axhline( 0.05, color='r', linestyle ='--')
+ax2.axvline( 180, color='g', linestyle ='--')
 ax2.set_title('p-values over-time')
 
 # MONTHLY AGGREGATION --------------------
@@ -112,16 +114,18 @@ t_p = pd.merge(tstats, pvals)
 ## sort and reset _index
 t_p.sort(['ymd'], inplace=True) # inplace = True to change the values
 t_p.reset_index(inplace=True, drop=True)
-t_p = t_p.dropna(axis = 0, how = 'any')  # drop any missing values in tstats and pvals
+# t_p = t_p.dropna(axis = 0, how = 'any')  # drop any missing values in tstats and pvals
 
 # PLOTTING ----------------------
 fig1 = plt.figure() #initialize plot
 ax1 = fig1.add_subplot(2,1,1) # (row, columns, reference) two rows, one column, first plot
 ax1.plot(t_p['tstats'])
 ax1.axhline(2, color='r', linestyle ='--')
+ax1.axvline(6, color='g', linestyle ='--')
 ax1.set_title('t-stats over-time')
 
 ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p['pvals'])
 ax2.axhline( 0.05, color='r', linestyle ='--')
+ax2.axvline(6, color='g', linestyle ='--')
 ax2.set_title('p-values over-time')
