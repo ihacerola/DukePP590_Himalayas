@@ -67,7 +67,9 @@ t_p_month = pd.merge(tstats_month, pvals_month)
 ## sort and reset _index  ---------------------------------------------------------------
 t_p_month.sort(['ym'], inplace=True) # inplace = True to change the values
 t_p_month.reset_index(inplace=True, drop=True)
-# t_p_month = t_p.dropna(axis = 0, how = 'any')  # drop any missing values in tstats and pvals
+
+# Finding the treatment starting month ------------------------------------------------
+treatment_month = t_p_month[t_p_month['ym'] == (2010, 1)] # the treatment started on 2010-01, get index 6 refers to the cut off line
 
 # PLOTTING ----------------------
 fig1 = plt.figure() #initialize plot
@@ -79,7 +81,7 @@ ax1.set_title('t-stats over-time (monthly)')
 
 ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p_month['pvals_month'])
-ax2.axhline( 0.05, color='r', linestyle ='--')
+ax2.axhline(0.05, color='r', linestyle ='--')
 ax2.axvline(6, color='g', linestyle ='--')
 ax2.set_title('p-values over-time (monthly)')
 
@@ -106,21 +108,20 @@ t_p_day = pd.merge(tstats_day, pvals_day)
 ## sort and reset _index ---------------------------------------------------------------
 t_p_day.sort(['date'], inplace=True) # inplace = True to change the values
 t_p_day.reset_index(inplace = True, drop = True)
-##t_p_day = t_p_day.dropna(axis = 0, how = 'any')  # drop any missing values in tstats and pvals
+
+# Finding the treatment starting date ------------------------------------------------
+treatment_day = t_p_day[t_p_day['date'] == '2010-01-01'] # the treatment started on 2010-01-01, get index 171 refers to the cut off line
 
 # PLOTTING ----------------------
 fig3 = plt.figure() #initialize plot
 ax3 = fig3.add_subplot(2,1,1) # (row, columns, reference) two rows, one column, first plot
 ax3.plot(t_p_day['tstats_day'])
 ax3.axhline(2, color='r', linestyle ='--')
-ax3.axvline(180, color='g', linestyle ='--')
+ax3.axvline(171, color='g', linestyle ='--')
 ax3.set_title('t-stats over-time (daily)')
 
 ax4 = fig3.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax4.plot(t_p_day['pvals_day'])
-ax4.axhline( 0.05, color='r', linestyle ='--')
-ax4.axvline( 180, color='g', linestyle ='--')
+ax4.axhline(0.05, color='r', linestyle ='--')
+ax4.axvline(171, color='g', linestyle ='--')
 ax4.set_title('p-values over-time (daily)')
-
-
-
