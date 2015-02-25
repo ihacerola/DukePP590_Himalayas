@@ -77,7 +77,7 @@ ax1.axhline(2, color='r', linestyle ='--')
 ax1.axvline(6, color='g', linestyle ='--')
 ax1.set_title('t-stats over-time (monthly)')
 
-ax2 = fig3.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
+ax2 = fig1.add_subplot(2,1,2) # (row, columns, reference) two rows, one column, second plot
 ax2.plot(t_p_month['pvals_month'])
 ax2.axhline( 0.05, color='r', linestyle ='--')
 ax2.axvline(6, color='g', linestyle ='--')
