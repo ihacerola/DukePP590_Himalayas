@@ -31,7 +31,7 @@ df.sort(['ID', 'time'], inplace = True)
 
 # TRIMMING  ---------------------------------------------------------------
 df = df[df['code'] == 1]
-df = df[((df['tariff'] == 'E') & (df['stimulus'] == 'E')) | ((df['tariff'] == 'A') & (df['stimulus'] == 'E'))]
+df = df[((df['tariff'] == 'E') & (df['stimulus'] == 'E')) | ((df['tariff'] == 'A') & (df['stimulus'] == '1'))]
 
 # TIME VARIABLE CREATION AND TIME SERIES CORRECTION ---------------------------
 df_time = pd.read_csv(root + "timeseries_correction.csv", na_values = missing, header = 0, parse_dates = [1], usecols = [1,2,3,4,9,10])
