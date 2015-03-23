@@ -2,11 +2,11 @@ from __future__ import division
 from pandas import Series, DataFrame
 from scipy.stats import ttest_ind
 import pandas as pd
-import numpy as np 
+import numpy as np
 import os
 import matplotlib.pyplot as plt
 
-main_dir = "/Users/lexiyang/Desktop/data"
+main_dir = "/Users/dnoriega/Dropbox/pubpol590_sp15/data_sets/CER"
 
 # ADVANCED PATHING ---------------------------------
 root = main_dir + "/cooked/"
@@ -15,11 +15,15 @@ paths = [root + v for v in os.listdir(root) if v.startswith("File")]
 #IMPORT DATA & Stacking-----------------------------------------------------------
 missing=['.','NA','NULL',' ','-','999999999']
 list_of_dfs = [pd.read_table(v, names = ['ID', 'time', 'kwh'], sep = " ", na_values= missing) for v in paths]
-df_stack = pd.concat (list_of_dfs, ignore_index = True)
+df_stack = pd.concat(list_of_dfs, ignore_index = True)
 del list_of_dfs
 
 df_assign = pd.read_csv(root + "SME and Residential allocations.csv", na_values= missing, usecols = range(0,4))
 df_assign.columns = ['ID', 'code', 'tariff', 'stimulus']
+
+""" TRIM ASSIGNMENTS FIRST THEN MERGE -- WILL REDUCE DATA DURING MERGE """
+df_assign = df_assign[df_assign['code'] == 1]
+df_assign = df_assign[((df_assign['tariff'] == 'E') & (df_assign['stimulus'] == 'E')) | ((df_assign['tariff'] == 'A') & (df_assign['stimulus'] == '1'))]
 
 # MERGING------------------------------------------------------------------------
 df = pd.merge(df_stack, df_assign)
@@ -27,12 +31,15 @@ df = pd.merge(df_stack, df_assign)
 # NEW Date Variables ---------------------------------------------------------------
 df['hour_cer'] = df['time'] % 100
 df['day_cer'] = (df['time'] - df['hour_cer']) / 100
+""" NO NEED TO SORT
 df.sort(['ID', 'time'], inplace = True)
+"""
 
+""" DO THIS EARLIER
 # TRIMMING  ---------------------------------------------------------------
 df = df[df['code'] == 1]
 df = df[((df['tariff'] == 'E') & (df['stimulus'] == 'E')) | ((df['tariff'] == 'A') & (df['stimulus'] == '1'))]
-
+"""
 # TIME VARIABLE CREATION AND TIME SERIES CORRECTION ---------------------------
 df_time = pd.read_csv(root + "timeseries_correction.csv", na_values = missing, header = 0, parse_dates = [1], usecols = [1,2,3,4,9,10])
 df = pd.merge(df, df_time)
