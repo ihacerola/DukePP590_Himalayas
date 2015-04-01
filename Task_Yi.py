@@ -43,10 +43,10 @@ df_assign = pd.merge(df_assign, df1)
 
 #df1 = DataFrame(np.concatenate((C, A1, A3, B1, B3)), columns = ['ID'])
 
-df2 = pd.read_csv(root + "kwh_redux_pretrail.csv", parse_dates=[3])
+df2 = pd.read_csv(root + "kwh_redux_pretrail.csv", parse_dates=[2])
 df = pd.merge(df1, df2)
 
-df['date'] = df['date'].apply(np.datetime64)
+### df['date'] = df['date'].apply(np.datetime64)
 df['year'] = df['date'].apply(lambda x: x.year)
 df['month'] = df['date'].apply(lambda x: x.month)
 
@@ -89,6 +89,8 @@ kwh_cols = [v for v in df5.columns.values if v.startswith('kwh')]
 ## vector_cols = [v for v in df5.columns.values if v.startswith('vector')]
 
 ## SET UP Y, X
+### I have a hard time understanding the control group here------------
+## Treatment A1 vs Non A1 or C
 y2 = df5['vector_2']
 y3 = df5['vector_3']
 y4 = df5['vector_4']
@@ -97,7 +99,7 @@ y5 = df5['vector_5']
 X = df5[kwh_cols]
 X = sm.add_constant(X)
 
-## LOGIT -----------------
+## LOGIT ----------------
 logit_model = sm.Logit(y2, X)
 logit_results = logit_model.fit()
 print(logit_results.summary())
