@@ -75,44 +75,87 @@ df3_piv.columns.name = None
 df4 = pd.merge(df_assign, df3_piv) # this attacthing order looks better
 del df3_piv, df_assign
 
+## Set up A1 vs C
+dfA1= df4[( df4.vector==1)| (df4.vector==2)]
 
 # GENDERATE DUMMIES FROM QULITATIVE DATA (i.e. categories)
 ## pd.get_dummies() will make dummy vectors for All "object" or "category" type
-
-df5 = pd.get_dummies(df4,columns = ['vector'])
-df5. drop(['vector_1'], axis = 1, inplace = True)
+dfA1 = pd.get_dummies(dfA1,columns = ['vector'])
+dfA1. drop(['vector_1'], axis = 1, inplace = True)
 
 ## SET UP THE DATA FOR LOGIT -------
-kwh_cols = [v for v in df5.columns.values if v.startswith('kwh')]
-
-## get cols
-## vector_cols = [v for v in df5.columns.values if v.startswith('vector')]
+kwh_cols = [v for v in dfA1.columns.values if v.startswith('kwh')]
 
 ## SET UP Y, X
-### I have a hard time understanding the control group here------------
-## Treatment A1 vs Non A1 or C
-y2 = df5['vector_2']
-y3 = df5['vector_3']
-y4 = df5['vector_4']
-y5 = df5['vector_5']
-
-X = df5[kwh_cols]
+yA1 = dfA1['vector_2']
+X = dfA1[kwh_cols]
 X = sm.add_constant(X)
 
 ## LOGIT ----------------
-logit_model = sm.Logit(y2, X)
+logit_model = sm.Logit(yA1, X)
 logit_results = logit_model.fit()
 print(logit_results.summary())
 
-logit_model = sm.Logit(y3, X)
+## Set up A3 vs C
+dfA3= df4[( df4.vector==1)| (df4.vector==3)]
+
+# GENDERATE DUMMIES FROM QULITATIVE DATA (i.e. categories)
+## pd.get_dummies() will make dummy vectors for All "object" or "category" type
+dfA3 = pd.get_dummies(dfA3,columns = ['vector'])
+dfA3. drop(['vector_1'], axis = 1, inplace = True)
+
+## SET UP THE DATA FOR LOGIT -------
+kwh_cols = [v for v in dfA3.columns.values if v.startswith('kwh')]
+
+## SET UP Y, X
+yA3 = dfA3['vector_3']
+X = dfA3[kwh_cols]
+X = sm.add_constant(X)
+
+## LOGIT ----------------
+logit_model = sm.Logit(yA3, X)
+logit_results = logit_model.fit()
+print(logit_results.summary())
+
+## Set up B1 vs C
+dfA3= df4[( df4.vector==1)| (df4.vector==4)]
+
+# GENDERATE DUMMIES FROM QULITATIVE DATA (i.e. categories)
+## pd.get_dummies() will make dummy vectors for All "object" or "category" type
+dfB1 = pd.get_dummies(dfB1,columns = ['vector'])
+dfB1. drop(['vector_1'], axis = 1, inplace = True)
+
+## SET UP THE DATA FOR LOGIT -------
+kwh_cols = [v for v in dfB1.columns.values if v.startswith('kwh')]
+
+## SET UP Y, X
+yB1 = dfB1['vector_4']
+X = dfB1[kwh_cols]
+X = sm.add_constant(X)
+
+## LOGIT ----------------
+logit_model = sm.Logit(yB1, X)
 logit_results = logit_model.fit()
 print(logit_results.summary())
 
 
-logit_model = sm.Logit(y4, X)
-logit_results = logit_model.fit()
-print(logit_results.summary())
+## Set up B3 vs C
+dfB3= df4[( df4.vector==1)| (df4.vector==5)]
 
-logit_model = sm.Logit(y5, X)
+# GENDERATE DUMMIES FROM QULITATIVE DATA (i.e. categories)
+## pd.get_dummies() will make dummy vectors for All "object" or "category" type
+dfB3 = pd.get_dummies(dfB3,columns = ['vector'])
+dfB3. drop(['vector_1'], axis = 1, inplace = True)
+
+## SET UP THE DATA FOR LOGIT -------
+kwh_cols = [v for v in dfB3.columns.values if v.startswith('kwh')]
+
+## SET UP Y, X
+yA3 = dfB3['vector_5']
+X = dfB3[kwh_cols]
+X = sm.add_constant(X)
+
+## LOGIT ----------------
+logit_model = sm.Logit(yB3, X)
 logit_results = logit_model.fit()
 print(logit_results.summary())
