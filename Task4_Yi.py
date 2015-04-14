@@ -1,6 +1,8 @@
 from __future__ import division
+from pandas import Series, DataFrame
 import pandas as pd
 import numpy as np
+import statsmodels.api as sm
 import os
 
 main_dir = '/Users/lexiyang/Desktop/data/task 4/'
@@ -55,14 +57,52 @@ sig.name = 't-stats'
 
 
 df_logit['p_hat'] = logit_results.predict()
-df_logit['T'] = 0 + (df_logit['tariff'] == 'C')
-df_logit['w'] = np.sqrt(df_logit['T'] /df_logit['p_hat']+(1 - df_logit['T'] )/(1 - df_logit['p_hat']))
+df_logit['trt'] = 0 + (df_logit['tariff'] == 'C')
+df_logit['w'] = np.sqrt(df_logit['trt'] /df_logit['p_hat']+(1 - df_logit['trt'] )/(1 - df_logit['p_hat']))
 
+df_w = df_logit[['ID', 'trt', 'w']]
 
 
 #####################################################################
 #                           SECTION 3                               #
 #####################################################################
 
+from fe_functions import *
 df_long = pd.read_csv(main_dir + 'task_4_kwh_long.csv')
-df_merge = pd.merge(df_long, df_logit)
+df = pd.merge(df_long, df_w)
+
+df['TP'] = df['trt'] * df['trial']
+df['log_kwh'] = (df['kwh'] + 1).apply(np.log)
+# create month string `mo_str` that adds "0" to single digit integers
+df['mo_str'] = np.array(["0" + str(v) if v < 10 else str(v) for v in df['month']])
+# concatenate to make ym string values
+df['ym'] = df['year'].apply(str) + "_" + df['mo_str']
+
+## SET UP Y, X
+y = df['log_kwh']
+T = df['trt']
+TP = df['TP']
+w = df['w']
+mu = pd.get_dummies(df['ym'], prefix = 'ym').iloc[:, 1:-1]
+X = pd.concat([TP, T, mu], axis=1)
+
+ids = df['ID']
+y = demean(y, ids)
+X = demean(X, ids)
+
+## WITHOUT WEIGHTS
+fe_model = sm.OLS(y, X) # linearly prob model
+fe_results = fe_model.fit() # get the fitted values
+print(fe_results.summary()) # print pretty results (no results given lack of obs)
+
+# WITH WEIGHTS
+## apply weights to data
+y = y*w # weight each y
+nms = X.columns.values # save column names
+X = np.array([x*w for k, x in X.iteritems()]) # weight each X value
+X = X.T # transpose (necessary as arrays create "row" vectors, not column)
+X = DataFrame(X, columns = nms) # update to dataframe; use original names
+
+fe_w_model = sm.OLS(y, X) # linearly prob model
+fe_w_results = fe_w_model.fit() # get the fitted values
+print(fe_w_results.summary()) # print pretty results (no results given lack of obs)
