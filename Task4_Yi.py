@@ -80,11 +80,11 @@ df['ym'] = df['year'].apply(str) + "_" + df['mo_str']
 
 ## SET UP Y, X
 y = df['log_kwh']
-T = df['trt']
+P = df['trial']
 TP = df['TP']
 w = df['w']
 mu = pd.get_dummies(df['ym'], prefix = 'ym').iloc[:, 1:-1]
-X = pd.concat([TP, T, mu], axis=1)
+X = pd.concat([TP, P, mu], axis=1)
 
 ids = df['ID']
 y = demean(y, ids)
