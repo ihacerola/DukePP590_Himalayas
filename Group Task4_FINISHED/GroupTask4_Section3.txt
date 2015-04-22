@@ -1,4 +1,4 @@
-﻿Unweighted Regression Results
+Unweighted Regression Results
 
 
                             OLS Regression Results                            
@@ -77,22 +77,19 @@ Warnings:
 
 
 
-
-
-
 i. 
 Both the magnitude and the significance of the coefficient for TP changed after applying weights. The coefficients became significant after applying weights. 
 
 
-ii. The coefficient on treatment-trial interaction variable represents the program impact. According to the unweighted regression results, holding other variables constant, the consumption of electricity of  treatment C4 receivers decreases by 0.8% after program implementation. However, the p-value (0.537) is NOT small enough to say the coefficient is statistically significant. In other words, treatment C4 does NOT cause people to reduce energy use in a statistically significant way. 
+ii. 
+The coefficient on treatment-trial interaction variable represents the program impact. According to the unweighted regression results, holding other variables constant, the consumption of electricity of  treatment C4 receivers decreases by 0.8% after program implementation. However, the p-value (0.537) is NOT small enough to say the coefficient is statistically significant. In other words, treatment C4 does NOT cause people to reduce energy use in a statistically significant way. 
 
 
-iii. The coefficient on treatment-trial interaction variable represents the difference in difference estimate of program impact. According to the weighted regression results, holding other variables constant, the consumption of electricity of  treatment C4 receivers decreases by 2.53% after program implementation. In addition, the p-value (0.009) is small enough to say the coefficient is statistically significant. In other words, treatment C4 does cause people to reduce energy use in a statistically significant way. 
+iii. 
+The coefficient on treatment-trial interaction variable represents the difference in difference estimate of program impact. According to the weighted regression results, holding other variables constant, the consumption of electricity of  treatment C4 receivers decreases by 2.53% after program implementation. In addition, the p-value (0.009) is small enough to say the coefficient is statistically significant. In other words, treatment C4 does cause people to reduce energy use in a statistically significant way. 
 
 
 iv. 
-
-
 There are two threshold questions to verify whether the propensity score can reduce bias on coefficients with weighting: “1) Were relevant variables omitted from the causal model? 2) Is there enough information to estimate the propensity scores with good accuracy?” (Freedman & Berk, 2008)
 
 

@@ -1,7 +1,6 @@
 i. 
 There is evidence of imbalance. According to logit results, kwh_2009_09, kwh_2009_12, D_4701.2_1 are significantly different in the treatment and control group. In addition, D_420.3.0 also is at the threshold for significantly different in the treatment and control group. 
 
-
 According to t-test results, 12 variables have t-statistics greater than 2, indicating significant difference in the mean of the variable between treatment and control group. 
 
 
