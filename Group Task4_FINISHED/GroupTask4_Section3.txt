@@ -102,4 +102,4 @@ From section I, the sample is imbalanced and the propensity score is constructed
 
 
 Reference: 
-Freedman, D. A., & Berk, R. A. (2008). Weighting regressions by propensity scores. Evaluation Review, 32(4), 392-409.
+Freedman, D. A., & Berk, R. A. (2008). Weighting regressions by propensity scores. Evaluation Review, 32(4), 392-409. 
