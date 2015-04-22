@@ -135,4 +135,4 @@ Question 405  is relatively irrelevant in the set of questions. The internet acc
 Question 410, 420, and 43111 all ask for people living in the household (e.g how many people under or over 15 years old live in the house). Question 470 and 4701 are also addressing the same issue: the heating source for the household. These questions are redundant, which might result in multicollinearity. 
 
 
-Demographic and socioeconomic information on household age, gender, income as well as the basic characteristics of house such as square-footage and location should be included in the logit model.
+Demographic and socioeconomic information on household age, gender, income as well as the basic characteristics of house such as square-footage and location should be included in the logit model. 
