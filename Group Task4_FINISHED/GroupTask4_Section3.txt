@@ -1,84 +1,9 @@
-Unweighted Regression Results
-
-
-                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                log_kwh   R-squared:                       0.193
-Model:                            OLS   Adj. R-squared:                  0.192
-Method:                 Least Squares   F-statistic:                     155.6
-Date:                Wed, 22 Apr 2015   Prob (F-statistic):          8.07e-265
-Time:                        10:41:29   Log-Likelihood:                 697.35
-No. Observations:                5868   AIC:                            -1377.
-Df Residuals:                    5859   BIC:                            -1317.
-Df Model:                           9                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
-------------------------------------------------------------------------------
-TP            -0.0080      0.013     -0.617      0.537        -0.034     0.017
-trial         -0.0201      0.012     -1.626      0.104        -0.044     0.004
-ym_2009_09    -0.0175      0.012     -1.471      0.141        -0.041     0.006
-ym_2009_10     0.0774      0.012      6.497      0.000         0.054     0.101
-ym_2009_11     0.1370      0.012     11.503      0.000         0.114     0.160
-ym_2009_12     0.2780      0.012     23.344      0.000         0.255     0.301
-ym_2010_01     0.2858      0.012     23.995      0.000         0.262     0.309
-ym_2010_02     0.1080      0.012      9.068      0.000         0.085     0.131
-ym_2010_03     0.1194      0.012     10.028      0.000         0.096     0.143
-==============================================================================
-Omnibus:                     2940.250   Durbin-Watson:                   1.194
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):           401634.697
-Skew:                          -1.374   Prob(JB):                         0.00
-Kurtosis:                      43.437   Cond. No.                         4.53
-==============================================================================
-
-
-Warnings:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
-
-
-
-Weighted  Regression Results
-
-
-                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                      y   R-squared:                       0.192
-Model:                            OLS   Adj. R-squared:                  0.190
-Method:                 Least Squares   F-statistic:                     154.3
-Date:                Wed, 22 Apr 2015   Prob (F-statistic):          8.05e-263
-Time:                        10:41:29   Log-Likelihood:                -314.58
-No. Observations:                5868   AIC:                             647.2
-Df Residuals:                    5859   BIC:                             707.3
-Df Model:                           9                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
-------------------------------------------------------------------------------
-TP            -0.0253      0.010     -2.615      0.009        -0.044    -0.006
-trial         -0.0222      0.011     -1.940      0.052        -0.045     0.000
-ym_2009_09    -0.0299      0.010     -2.944      0.003        -0.050    -0.010
-ym_2009_10     0.0491      0.010      4.825      0.000         0.029     0.069
-ym_2009_11     0.0982      0.010      9.657      0.000         0.078     0.118
-ym_2009_12     0.2296      0.010     22.571      0.000         0.210     0.250
-ym_2010_01     0.2396      0.010     23.547      0.000         0.220     0.259
-ym_2010_02     0.0846      0.010      8.313      0.000         0.065     0.105
-ym_2010_03     0.0855      0.010      8.402      0.000         0.066     0.105
-==============================================================================
-Omnibus:                     2492.920   Durbin-Watson:                   1.238
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):           169546.835
-Skew:                          -1.185   Prob(JB):                         0.00
-Kurtosis:                      29.226   Cond. No.                         4.98
-==============================================================================
-
-
-Warnings:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
-
+**7/8 pts**
 
 i. 
 Both the magnitude and the significance of the coefficient for TP changed after applying weights. The coefficients became significant after applying weights. 
+
+**DAN: By how much? In what direction? Use the numbers! -1 pt**
 
 
 ii. 
@@ -93,7 +18,9 @@ iv.
 There are two threshold questions to verify whether the propensity score can reduce bias on coefficients with weighting: “1) Were relevant variables omitted from the causal model? 2) Is there enough information to estimate the propensity scores with good accuracy?” (Freedman & Berk, 2008)
 
 
-From section I, the sample is imbalanced and the propensity score is constructed based on survey questions that are irrelevant, redundant, and missing variables. Therefore, there is evidence that there is bias in propensity score and weights, which leads to biased coefficients. The coefficient estimate of the treatment effect is not believable. 
+From section I, the sample is imbalanced and the propensity score is constructed based on survey questions that are irrelevant, redundant, and missing variables. Therefore, there is evidence that there is bias in propensity score and weights, which leads to biased coefficients. The coefficient estimate of the treatment effect is not believable.
+
+**BOOM. Nicely done!** 
 
 
 

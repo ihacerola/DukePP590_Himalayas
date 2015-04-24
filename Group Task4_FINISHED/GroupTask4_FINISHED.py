@@ -1,3 +1,5 @@
+"""9/9 pts"""
+
 from __future__ import division
 from pandas import Series, DataFrame
 import pandas as pd
@@ -5,7 +7,7 @@ import numpy as np
 import statsmodels.api as sm
 import os
 
-main_dir = '/Users/lexiyang/Desktop/data/task 4/'
+main_dir = '/Users/dnoriega/Dropbox/pubpol590_sp15/data_sets/CER/tasks/4_task_data/'
 
 #####################################################################
 #                           SECTION 0                              #
@@ -34,7 +36,7 @@ for i in tariffs:
     for j in stimuli:
         # dummy vars must start with "D_" and consumption vars with "kwh_"
         logit_results, df_logit = do_logit(df_pretrial, i, j, add_D=None, mc=False)
-        
+
 # QUICK MEANS COMPARISON WITH T-TEST BY HAND----------
 # create means
 grp = df_logit.groupby('tariff')
